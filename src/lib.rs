@@ -23,7 +23,7 @@
 //! let cb_log = log.clone();
 //!
 //! tracing_subscriber::registry()
-//!     .with(EnvFilter::new("tracing-async=trace"))
+//!     .with(EnvFilter::new("tracing_async2=trace"))
 //!     .with(callback_layer(move |event| {
 //!         if let Ok(mut log) = cb_log.write() {
 //!             log.push(OwnedEvent::from(event));
@@ -52,7 +52,7 @@
 //!
 //!     let (tx, mut rx) = mpsc::channel(100);
 //!     tracing_subscriber::registry()
-//!         .with(EnvFilter::new("tracing-async=trace"))
+//!         .with(EnvFilter::new("tracing_async2=trace"))
 //!         .with(channel_layer(tx)) // <--- use the channel
 //!         .init();
 //!
@@ -81,7 +81,7 @@
 //! rt.block_on(async move {
 //!
 //!     tracing_subscriber::registry()
-//!         .with(EnvFilter::new("tracing-async=trace"))
+//!         .with(EnvFilter::new("tracing_async2=trace"))
 //!         .with(async_layer(16, move |event| {
 //!             async move {
 //!                 // Do something with the event like saving it to the database.
@@ -524,7 +524,7 @@ mod tests {
         let cb_events = events.clone();
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(callback_layer(move |event| {
                 if let Ok(mut events) = cb_events.write() {
                     events.push(event.into());
@@ -549,7 +549,7 @@ mod tests {
         let cb_events = events.clone();
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(callback_layer_with_spans(move |event, spans| {
                 if let Ok(mut events) = cb_events.write() {
                     events.push(OwnedEventWithSpans::new(event, spans));
@@ -581,7 +581,7 @@ mod tests {
         let (tx, mut rx) = mpsc::channel(100);
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(channel_layer(tx))
             .set_default();
 
@@ -618,7 +618,7 @@ mod tests {
         let (tx, mut rx) = mpsc::channel(100);
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(channel_layer_with_spans(tx))
             .set_default();
 
@@ -654,7 +654,7 @@ mod tests {
         let cb_events = events.clone();
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(async_layer(16, move |event| {
                 let f_events = cb_events.clone();
                 async move {
@@ -687,7 +687,7 @@ mod tests {
         let cb_events = events.clone();
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(async_layer_with_spans(16, move |event_with_span| {
                 let f_events = cb_events.clone();
                 async move {
@@ -720,7 +720,7 @@ mod tests {
         let events = Arc::new(RwLock::new(Vec::<OwnedEvent>::new()));
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(accumulating_layer(events.clone()))
             .set_default();
 
@@ -745,7 +745,7 @@ mod tests {
         let events = Arc::new(RwLock::new(Vec::<OwnedEventWithSpans>::new()));
 
         let _guard = tracing_subscriber::registry()
-            .with(EnvFilter::new("tracing_async=trace"))
+            .with(EnvFilter::new("tracing_async2=trace"))
             .with(accumulating_layer_with_spans(events.clone()))
             .set_default();
 

@@ -27,7 +27,7 @@ let log = Arc::new(RwLock::new(Vec::new()));
 let cb_log = log.clone();
 
 tracing_subscriber::registry()
-    .with(EnvFilter::new("tracing-async=trace"))
+    .with(EnvFilter::new("tracing_async2=trace"))
     .with(callback_layer(move |event| {
         if let Ok(mut log) = cb_log.write() {
             log.push(OwnedEvent::from(event));
@@ -56,7 +56,7 @@ rt.block_on(async move {
 
     let (tx, mut rx) = mpsc::channel(100);
     tracing_subscriber::registry()
-        .with(EnvFilter::new("tracing-async=trace"))
+        .with(EnvFilter::new("tracing_async2=trace"))
         .with(channel_layer(tx)) // <--- use the channel
         .init();
 
@@ -85,7 +85,7 @@ let rt = tokio::runtime::Builder::new_current_thread()
 rt.block_on(async move {
 
     tracing_subscriber::registry()
-        .with(EnvFilter::new("tracing-async=trace"))
+        .with(EnvFilter::new("tracing_async2=trace"))
         .with(async_layer(16, move |event| {
             async move {
                 // Do something with the event like saving it to the database.

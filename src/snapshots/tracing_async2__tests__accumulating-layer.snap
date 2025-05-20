@@ -1,0 +1,62 @@
+---
+source: src/lib.rs
+expression: extract_events(&events)
+---
+[
+  {
+    "level": "Trace",
+    "file": "src/lib.rs",
+    "target": "tracing_async2::tests",
+    "line": "<line>",
+    "name": "event src/lib.rs:<line>",
+    "message": "this is a trace message",
+    "fields": {
+      "bar": 2,
+      "foo": 1
+    }
+  },
+  {
+    "level": "Debug",
+    "file": "src/lib.rs",
+    "target": "tracing_async2::tests",
+    "line": "<line>",
+    "name": "event src/lib.rs:<line>",
+    "message": "this is a debug message",
+    "fields": {
+      "pi": 3.14159265
+    }
+  },
+  {
+    "level": "Info",
+    "file": "src/lib.rs",
+    "target": "tracing_async2::tests",
+    "line": "<line>",
+    "name": "event src/lib.rs:<line>",
+    "message": "this is an info message",
+    "fields": {
+      "job": "foo"
+    }
+  },
+  {
+    "level": "Warn",
+    "file": "src/lib.rs",
+    "target": "tracing_async2::tests",
+    "line": "<line>",
+    "name": "event src/lib.rs:<line>",
+    "message": "this is a warning message",
+    "fields": {
+      "job": "foo"
+    }
+  },
+  {
+    "level": "Error",
+    "file": "src/lib.rs",
+    "target": "tracing_async2::tests",
+    "line": "<line>",
+    "name": "event src/lib.rs:<line>",
+    "message": "this is an error message",
+    "fields": {
+      "job": "foo"
+    }
+  }
+]

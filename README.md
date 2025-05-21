@@ -1,5 +1,4 @@
 ![Maintenance](https://img.shields.io/badge/maintenance-activly--developed-brightgreen.svg)
-[![Rust](https://github.com/macprog-guy/tracing-async2/actions/workflows/tests.yml/badge.svg?event=release)](https://github.com/macprog-guy/tracing-async2/actions/workflows/tests.yml)
 [![Rust](https://github.com/macprog-guy/tracing-async2/actions/workflows/tests.yml/badge.svg)](https://github.com/macprog-guy/tracing-async2/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

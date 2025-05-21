@@ -1,7 +1,7 @@
 [package]
 name = "tracing-async2"
 description = "Generic tracing layer library for working with tracing events including for async work."
-version = "0.2.5"
+version = "0.2.6"
 edition = "2024"
 license = "MIT"
 repository = "https://github.com/macprog-guy/tracing-async2.git"
@@ -9,9 +9,9 @@ keywords = ["tokio","tracing","async","callback","database"]
 categories = ["asynchronous","development-tools::debugging"]
 
 [dependencies]
-serde = {version=">=1.0.219", features=["derive"], optional=true}
+serde = {version=">=1", features=["derive"], optional=true}
 serde_json = {version=">=1.0", features=["preserve_order"], optional=true}
-tokio = {version=">=1.44", features=["macros","rt","sync","time"], optional=true}
+tokio = {version=">=1.1", features=["macros","rt","sync","time"], optional=true}
 tracing = ">=0.1"
 tracing-subscriber = {version=">=0.3", features=["env-filter","default"]}
 

@@ -182,7 +182,7 @@ where
     let (tx, mut rx) = mpsc::channel(buffer_size);
     tokio::spawn(async move {
         while let Some(event) = rx.recv().await {
-            callback(OwnedEvent::from(event)).await;
+            callback(event).await;
         }
     });
     channel_layer(tx)
@@ -280,6 +280,7 @@ where
 ///
 #[cfg(feature = "span")]
 pub struct CallbackLayerWithSpan {
+    #[allow(clippy::type_complexity)]
     callback: Box<dyn Fn(&Event<'_>, Option<Vec<JsonMap>>) + Send + Sync + 'static>,
 }
 
@@ -422,7 +423,7 @@ impl From<&Event<'_>> for OwnedEvent {
             target: meta.target().into(),
             level: meta.level().into(),
             file: meta.file().map(String::from),
-            line: meta.line().clone(),
+            line: meta.line(),
             message,
             fields: visitor.0,
         }

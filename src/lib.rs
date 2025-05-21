@@ -98,7 +98,7 @@ use tokio::sync::mpsc::{self, error::TrySendError};
 use std::sync::{Arc, RwLock};
 
 use {
-    std::fmt,
+    std::fmt::{self, Display},
     tracing::{
         Event, Subscriber,
         field::{Field, Visit},
@@ -393,6 +393,25 @@ impl From<&tracing::Level> for TracingLevel {
             tracing::Level::WARN => TracingLevel::Warn,
             tracing::Level::ERROR => TracingLevel::Error,
         }
+    }
+}
+
+impl AsRef<str> for TracingLevel {
+    fn as_ref(&self) -> &str {
+        use TracingLevel::*;
+        match self {
+            Trace => "TRACE",
+            Debug => "DEBUG",
+            Info => "INFO",
+            Warn => "WARN",
+            Error => "ERROR",
+        }
+    }
+}
+
+impl Display for TracingLevel {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.as_ref())
     }
 }
 

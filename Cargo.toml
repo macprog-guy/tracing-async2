@@ -1,7 +1,7 @@
 [package]
 name = "tracing-async2"
 description = "Generic tracing layer library for working with tracing events including for async work."
-version = "0.2.4"
+version = "0.2.5"
 edition = "2024"
 license = "MIT"
 repository = "https://github.com/macprog-guy/tracing-async2.git"

@@ -471,14 +471,18 @@ impl Visit for FieldVisitor {
 #[cfg(test)]
 mod tests {
 
+    #[cfg(feature = "async")]
+    use {
+        std::sync::{Arc, RwLock},
+        tokio::sync::mpsc,
+    };
+
     use {
         super::*,
         insta::{
             internals::{Content, ContentPath},
             *,
         },
-        std::sync::{Arc, RwLock},
-        tokio::sync::mpsc,
         tracing_subscriber::{EnvFilter, prelude::*},
     };
 
@@ -517,8 +521,8 @@ mod tests {
     // Tests
     // ----------------------------------------------------------------------------
 
-    #[tokio::test]
-    async fn test_callback_layer() {
+    #[test]
+    fn test_callback_layer() {
         //
         // Collect logs into a vector
         let events = Arc::new(RwLock::new(Vec::<OwnedEvent>::new()));
@@ -542,8 +546,8 @@ mod tests {
     }
 
     #[cfg(feature = "span")]
-    #[tokio::test]
-    async fn test_callback_layer_with_spans() {
+    #[test]
+    fn test_callback_layer_with_spans() {
         //
         // Collect logs into a vector
         let events = Arc::new(RwLock::new(Vec::<OwnedEventWithSpans>::new()));
@@ -568,6 +572,7 @@ mod tests {
         });
     }
 
+    #[cfg(feature = "async")]
     #[tokio::test]
     async fn test_channel_layer() {
         //
@@ -604,7 +609,7 @@ mod tests {
         });
     }
 
-    #[cfg(feature = "span")]
+    #[cfg(all(feature = "async", feature = "span"))]
     #[tokio::test]
     async fn test_channel_layer_with_spans() {
         //
@@ -643,6 +648,7 @@ mod tests {
         });
     }
 
+    #[cfg(feature = "async")]
     #[tokio::test]
     async fn test_async_layer() {
         //
@@ -675,7 +681,7 @@ mod tests {
         });
     }
 
-    #[cfg(feature = "span")]
+    #[cfg(all(feature = "async", feature = "span"))]
     #[tokio::test]
     async fn test_async_layer_with_spans() {
         //
@@ -710,12 +716,9 @@ mod tests {
         });
     }
 
-    #[tokio::test]
-    async fn test_accumulating_layer() {
-        //
-        use std::time::Duration;
-        use tokio::time::sleep;
-
+    #[cfg(feature = "accumulator")]
+    #[test]
+    fn test_accumulating_layer() {
         //
         // Collect logs into a vector
         let events = Arc::new(RwLock::new(Vec::<OwnedEvent>::new()));
@@ -726,7 +729,6 @@ mod tests {
             .set_default();
 
         run_trace_events();
-        sleep(Duration::from_millis(100)).await;
 
         assert_json_snapshot!("accumulating-layer", extract_events(&events), {
             "[].line" => "<line>",
@@ -734,13 +736,9 @@ mod tests {
         });
     }
 
-    #[cfg(feature = "span")]
-    #[tokio::test]
-    async fn test_accumulating_layer_with_spans() {
-        //
-        use std::time::Duration;
-        use tokio::time::sleep;
-
+    #[cfg(all(feature = "span", feature = "accumulator"))]
+    #[test]
+    fn test_accumulating_layer_with_spans() {
         //
         // Collect logs into a vector
         let events = Arc::new(RwLock::new(Vec::<OwnedEventWithSpans>::new()));
@@ -751,7 +749,6 @@ mod tests {
             .set_default();
 
         run_trace_events();
-        sleep(Duration::from_millis(100)).await;
 
         assert_json_snapshot!("accumulating-layer-with-spans", extract_events(&events), {
             "[].event.line" => "<line>",

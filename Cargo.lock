@@ -500,7 +500,7 @@ dependencies = [
 
 [[package]]
 name = "tracing-async2"
-version = "0.2.8"
+version = "0.2.9"
 dependencies = [
  "insta",
  "quote",
@@ -509,17 +509,8 @@ dependencies = [
  "syn",
  "tokio",
  "tracing",
- "tracing-async2-macros 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tracing-async2-macros 0.2.8",
  "tracing-subscriber",
-]
-
-[[package]]
-name = "tracing-async2-macros"
-version = "0.2.8"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
 ]
 
 [[package]]
@@ -534,13 +525,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "tracing-async2-macros"
+version = "0.2.9"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "tracing-async2-macros-test"
-version = "0.2.8"
+version = "0.2.9"
 dependencies = [
  "tokio",
  "tracing",
  "tracing-async2",
- "tracing-async2-macros 0.2.8",
+ "tracing-async2-macros 0.2.9",
  "tracing-subscriber",
 ]
 

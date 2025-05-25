@@ -154,6 +154,9 @@ use {
     tracing_subscriber::{Layer, layer::Context, registry::LookupSpan},
 };
 
+#[cfg(feature = "macros")]
+pub use tracing_async2_macros::*;
+
 #[cfg(feature = "span")]
 type JsonMap = serde_json::Map<String, serde_json::Value>;
 

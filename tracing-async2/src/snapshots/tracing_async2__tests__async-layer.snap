@@ -1,14 +1,14 @@
 ---
-source: src/lib.rs
+source: tracing-async2/src/lib.rs
 expression: extract_events(&events)
 ---
 [
   {
     "level": "Trace",
-    "file": "src/lib.rs",
+    "file": "tracing-async2/src/lib.rs",
     "target": "tracing_async2::tests",
     "line": "<line>",
-    "name": "event src/lib.rs:<line>",
+    "name": "event tracing-async2/src/lib.rs:<line>",
     "message": "this is a trace message",
     "fields": {
       "bar": 2,
@@ -17,10 +17,10 @@ expression: extract_events(&events)
   },
   {
     "level": "Debug",
-    "file": "src/lib.rs",
+    "file": "tracing-async2/src/lib.rs",
     "target": "tracing_async2::tests",
     "line": "<line>",
-    "name": "event src/lib.rs:<line>",
+    "name": "event tracing-async2/src/lib.rs:<line>",
     "message": "this is a debug message",
     "fields": {
       "pi": 3.14159265
@@ -28,10 +28,10 @@ expression: extract_events(&events)
   },
   {
     "level": "Info",
-    "file": "src/lib.rs",
+    "file": "tracing-async2/src/lib.rs",
     "target": "tracing_async2::tests",
     "line": "<line>",
-    "name": "event src/lib.rs:<line>",
+    "name": "event tracing-async2/src/lib.rs:<line>",
     "message": "this is an info message",
     "fields": {
       "job": "foo"
@@ -39,10 +39,10 @@ expression: extract_events(&events)
   },
   {
     "level": "Warn",
-    "file": "src/lib.rs",
+    "file": "tracing-async2/src/lib.rs",
     "target": "tracing_async2::tests",
     "line": "<line>",
-    "name": "event src/lib.rs:<line>",
+    "name": "event tracing-async2/src/lib.rs:<line>",
     "message": "this is a warning message",
     "fields": {
       "job": "foo"
@@ -50,10 +50,10 @@ expression: extract_events(&events)
   },
   {
     "level": "Error",
-    "file": "src/lib.rs",
+    "file": "tracing-async2/src/lib.rs",
     "target": "tracing_async2::tests",
     "line": "<line>",
-    "name": "event src/lib.rs:<line>",
+    "name": "event tracing-async2/src/lib.rs:<line>",
     "message": "this is an error message",
     "fields": {
       "job": "foo"

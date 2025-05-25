@@ -9,6 +9,53 @@
 //! [`tracing::Event`]s using simple callbacks or even in an asynchronous
 //! context. This is done using variations the [`CallbackLayer`].
 //!
+//!
+//! # Using the `tracing_layer_async_within` macro
+//!
+//! This macro simplifies some async scenarios where the provided callback was
+//! not `Sync` or `Send`. Here is an example of how you could use this macro to
+//! create a layer that saves tracing events into a database using `tokio_postgres`:
+//!
+//! ```no_run
+//! #[tracing_layer_async_within]
+//! pub fn pg_tracing_layer(client: &PGClient, event: OwnedEvent) -> Result<(), tokio_postgres::Error> {
+//!     // Do what needs to be done!
+//! }
+//! ```
+//!
+//! The above code gets expanded into the code below:
+//!
+//! ```no_run
+//! pub fn pg_tracing_layer(client: PGClient, buffer_size: usize) -> CallbackLayer {
+//!
+//!     let (tx, mut rx) = mpsc::channel::<OwnedEvent>(buffer_size);
+//!
+//!     tokio::spawn(async move {
+//!         let client = Arc::new(client);
+//!         while let Some(event) = rx.recv().await {
+//!             if let Err(e) = save_tracing_event_to_database(&client, event).await {
+//!                 eprintln!("{} error: {}", "pg_tracing_layer", e);
+//!             }
+//!         }
+//!     });
+//!
+//!     pub async fn save(
+//!        client: &Arc<tokio_postgres::Client>,
+//!        event: OwnedEvent,
+//!     ) -> Result<(), tokio_postgres::Error> {
+//!         // Do what needs to be done!
+//!     }
+//!
+//!     channel_layer(tx)
+//! }
+//! ```
+//!
+//! Of note are the following:
+//! - The `PGClient` was declared as a reference but the generated returned function requires it to be owned.
+//! - `buffer_size` is an additional parameter to the generated function.
+//!
+//!
+//!
 //! # Using `callback_layer`
 //!
 //! If your needs are really simple, like accumulating traces in a vector.

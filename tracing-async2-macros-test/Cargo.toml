@@ -1,0 +1,13 @@
+[package]
+name = "tracing-async2-macros-test"
+version = "0.2.8"
+edition = "2024"
+
+[dependencies]
+tracing-async2-macros = {path = "../tracing-async2-macros"}
+tracing-async2 = {path = "../tracing-async2"}
+tokio.workspace = true
+
+[dev-dependencies]
+tracing.workspace = true
+tracing-subscriber.workspace = true

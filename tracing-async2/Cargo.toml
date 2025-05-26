@@ -18,7 +18,7 @@ syn = {version=">=2", optional=true}
 tokio = {workspace = true, optional=true}
 tracing.workspace = true
 tracing-subscriber.workspace = true
-tracing-async2-macros = {version=">=0.2", optional=true}
+tracing-async2-macros = {version="0.2.10", optional=true}
 
 [dev-dependencies]
 insta = {version=">=1.42", features=["redactions","json"]}

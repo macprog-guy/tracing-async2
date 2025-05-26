@@ -1,8 +1,7 @@
-# tracing-async2
-
 ![Maintenance](https://img.shields.io/badge/maintenance-activly--developed-brightgreen.svg)
-[![crates.io](https://img.shields.io/crates/v/tracing-async2)](https://crates.io/crates/tracing-async2)
+[![crates.io](https://img.shields.io/crates/v/tracing-async2-macros)](https://crates.io/crates/tracing-async2-macros)
 
+# tracing-async2
 
 This crate makes it easy to create your own custom tracing layers using a
 simple callback mechanism. One abvious use is to store tracing events into
@@ -38,16 +37,13 @@ pub fn pg_tracing_layer(client: PGClient, buffer_size: usize) -> CallbackLayer {
     tokio::spawn(async move {
         let client = Arc::new(client);
         while let Some(event) = rx.recv().await {
-            if let Err(e) = save_tracing_event_to_database(&client, event).await {
+            if let Err(e) = save(&client, event).await {
                 eprintln!("{} error: {}", "pg_tracing_layer", e);
             }
         }
     });
 
-    pub async fn save(
-       client: &Arc<tokio_postgres::Client>,
-       event: OwnedEvent,
-    ) -> Result<(), tokio_postgres::Error> {
+    pub async fn save(client: &PGClient, event: OwnedEvent) -> Result<(), tokio_postgres::Error> {
         // Do what needs to be done!
     }
 

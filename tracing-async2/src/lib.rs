@@ -33,16 +33,13 @@
 //!     tokio::spawn(async move {
 //!         let client = Arc::new(client);
 //!         while let Some(event) = rx.recv().await {
-//!             if let Err(e) = save_tracing_event_to_database(&client, event).await {
+//!             if let Err(e) = save(&client, event).await {
 //!                 eprintln!("{} error: {}", "pg_tracing_layer", e);
 //!             }
 //!         }
 //!     });
 //!
-//!     pub async fn save(
-//!        client: &Arc<tokio_postgres::Client>,
-//!        event: OwnedEvent,
-//!     ) -> Result<(), tokio_postgres::Error> {
+//!     pub async fn save(client: &PGClient, event: OwnedEvent) -> Result<(), tokio_postgres::Error> {
 //!         // Do what needs to be done!
 //!     }
 //!

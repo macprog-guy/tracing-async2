@@ -500,7 +500,7 @@ dependencies = [
 
 [[package]]
 name = "tracing-async2"
-version = "0.2.9"
+version = "0.2.10"
 dependencies = [
  "insta",
  "quote",
@@ -526,7 +526,7 @@ dependencies = [
 
 [[package]]
 name = "tracing-async2-macros"
-version = "0.2.9"
+version = "0.2.10"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -540,7 +540,7 @@ dependencies = [
  "tokio",
  "tracing",
  "tracing-async2",
- "tracing-async2-macros 0.2.9",
+ "tracing-async2-macros 0.2.10",
  "tracing-subscriber",
 ]
 

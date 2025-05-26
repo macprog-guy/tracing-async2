@@ -1,6 +1,7 @@
-![Maintenance](https://img.shields.io/badge/maintenance-activly--developed-brightgreen.svg)
-
 # tracing-async2
+
+![Maintenance](https://img.shields.io/badge/maintenance-activly--developed-brightgreen.svg)
+[![crates.io](https://img.shields.io/crates/v/tracing-async2)](https://crates.io/crates/tracing-async2)
 
 
 This crate makes it easy to create your own custom tracing layers using a
